@@ -1,0 +1,27 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.github.invizible"
+    },
+    "jhipsterVersion": "4.13.3",
+    "baseName": "publications",
+    "packageName": "com.github.invizible",
+    "packageFolder": "com/github/invizible",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "gradle",
+    "enableSocialSignIn": false,
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "47d124a2a6a0d3dd7fdf94817f715382131f5e4b",
+    "enableTranslation": false
+  }
+}

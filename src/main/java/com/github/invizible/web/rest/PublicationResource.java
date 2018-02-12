@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.github.invizible.domain.Publication;
 
 import com.github.invizible.repository.PublicationRepository;
+import com.github.invizible.repository.UserRepository;
+import com.github.invizible.security.SecurityUtils;
 import com.github.invizible.web.rest.errors.BadRequestAlertException;
 import com.github.invizible.web.rest.util.HeaderUtil;
 import com.github.invizible.web.rest.util.PaginationUtil;
@@ -36,9 +38,11 @@ public class PublicationResource {
     private static final String ENTITY_NAME = "publication";
 
     private final PublicationRepository publicationRepository;
+    private final UserRepository userRepository;
 
-    public PublicationResource(PublicationRepository publicationRepository) {
+    public PublicationResource(PublicationRepository publicationRepository, UserRepository userRepository) {
         this.publicationRepository = publicationRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -55,6 +59,11 @@ public class PublicationResource {
         if (publication.getId() != null) {
             throw new BadRequestAlertException("A new publication cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
+        SecurityUtils.getCurrentUserLogin()
+            .flatMap(userRepository::findOneByLogin)
+            .ifPresent(publication::setAuthor);
+
         Publication result = publicationRepository.save(publication);
         return ResponseEntity.created(new URI("/api/publications/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

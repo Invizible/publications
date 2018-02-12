@@ -75,7 +75,7 @@ public class PublicationResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final PublicationResource publicationResource = new PublicationResource(publicationRepository);
+        final PublicationResource publicationResource = new PublicationResource(publicationRepository, userRepository);
         this.restPublicationMockMvc = MockMvcBuilders.standaloneSetup(publicationResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

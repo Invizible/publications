@@ -38,7 +38,7 @@ public class Publication implements Serializable {
     private String text;
 
     @Column(name = "publication_date")
-    private ZonedDateTime publicationDate;
+    private ZonedDateTime publicationDate = ZonedDateTime.now();
 
     @ManyToOne(optional = false)
     @NotNull

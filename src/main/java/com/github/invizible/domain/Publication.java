@@ -41,7 +41,6 @@ public class Publication implements Serializable {
     private ZonedDateTime publicationDate = ZonedDateTime.now();
 
     @ManyToOne(optional = false)
-    @NotNull
     private User author;
 
     @ManyToMany

@@ -43,7 +43,7 @@ public class Publication implements Serializable {
     @ManyToOne(optional = false)
     private User author;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "publication_rubrics",
                joinColumns = @JoinColumn(name="publications_id", referencedColumnName="id"),
